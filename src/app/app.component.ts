@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(private router: Router,
     private readonly store :Store
   ) {
-    this.mydata.subscribe(data => this.creditCardPayments = data);
+    this.mydata.subscribe(data => this.creditCardPayments = data.creditCardDetails);
    }
   goto() {
     this.isRoot = true;

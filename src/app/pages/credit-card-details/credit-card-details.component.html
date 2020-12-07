@@ -128,7 +128,7 @@
         <input type="month" min="{{minMonth}}" (blur)="checkExpiryDate()"  id="expirationDate" formControlName="expirationDate"
         (ngModelChange)="onExpirationChange($event)">
         <span class="invalid-input" *ngIf="f.expirationDate.touched && f.expirationDate.errors">Expiration Date is required</span>
-        <span class="invalid-input" *ngIf="f.expirationDate.touched  && !validateExpiryDate">Expiration Date must greater than current date</span>
+        <span class="invalid-input" *ngIf="f.expirationDate.touched  && !validateExpiryDate">Please enter valid date.</span>
 
 
     </div>
@@ -152,4 +152,8 @@
 </div>
 
 <div id="toast" [ngClass]="addedCard ? 'show' : ''"><div id="desc">Card Added!!!</div></div>
+<div *ngIf="creditCardPaymentDetails">
+
+        <div id="toast" [ngClass]="creditCardPaymentDetails ? 'show red-color' : ''" ><div id="desc">Not able to add Card :-(</div></div>
+</div>
 

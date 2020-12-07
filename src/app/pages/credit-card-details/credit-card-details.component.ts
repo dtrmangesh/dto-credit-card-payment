@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { PaymentDetailsService } from '../../payment-details.service';
-import { Store } from '@ngrx/store';
-import { AddCreditCard, AddcreditCardSuccess } from '../../store/actions/payment.actions';
+import { Store, select } from '@ngrx/store';
+import { AddCreditCard, LoadCreditCardFailure } from '../../store/actions/payment.actions';
+import { take } from 'rxjs/operators';
+import { selectEvent } from 'src/app/store/reducers/payment.reducers';
 
 @Component({
   selector: 'app-credit-card-details',
@@ -10,7 +11,10 @@ import { AddCreditCard, AddcreditCardSuccess } from '../../store/actions/payment
   styleUrls: ['./credit-card-details.component.css']
 })
 export class CreditCardDetailsComponent implements OnInit {
-  creditCardPayment :any;
+  mydata = this.store.pipe(take(1), select(selectEvent));
+
+  creditCardPayment: any;
+  creditCardPaymentDetails: any;
   submitted = false;
   cardNumber = '';
   cardName = "";
@@ -22,7 +26,6 @@ export class CreditCardDetailsComponent implements OnInit {
   addedCard = false;
   validateExpiryDate = true;
   constructor(private readonly formBuilder: FormBuilder,
-    private data: PaymentDetailsService,
     private store : Store
 
     ) { }
@@ -64,12 +67,13 @@ export class CreditCardDetailsComponent implements OnInit {
     const expiryDate = this.creditCardPayment.get('expirationDate').value;
     var validateExpiryDate = expiryDate.split('-');
     const getYear = new Date().getFullYear();
-    this.validateExpiryDate = validateExpiryDate[0] > getYear ? true : false;
+    const getMonth = new Date().getMonth() + 1;
+    this.validateExpiryDate = validateExpiryDate[0] >= getYear && validateExpiryDate[1] >= getMonth ? true : false;
   }
 
   onAddCard() {
     this.submitted = true;
-
+    
     const data = {
       creditCardNumber: this.creditCardPayment.get('creditCardNumber').value,
       cardHolderName: this.creditCardPayment.get('cardHolderName').value,
@@ -77,9 +81,16 @@ export class CreditCardDetailsComponent implements OnInit {
       securityCode :this.creditCardPayment.get('securityCode').value,
       amount :this.creditCardPayment.get('amount').value
     }
-    this.store.dispatch(new AddCreditCard(data));
+  
+      this.store.dispatch(new AddCreditCard(data));
     this.addedCard = true;
-    setTimeout(()=>this.addedCard=false ,3000)
+    this.mydata.subscribe(data => this.creditCardPaymentDetails = data.error);
+  
+    setTimeout(() => {
+    this.addedCard = false;
+      this.creditCardPaymentDetails = '';
+    }, 3000)
+    
   }
 
   flipCard(event :any) {
@@ -109,4 +120,5 @@ export class CreditCardDetailsComponent implements OnInit {
     const getMonth = new Date().getMonth() + 1;
     return getYear + '-' + getMonth;
   }
+ 
 }

@@ -39,6 +39,10 @@ button:disabled{
     display: grid;
     justify-content: center;
 }
+
+.red-color{
+    background: red !important;
+}
 .invalid-input{
     color: red;
     font-family: sans-serif;

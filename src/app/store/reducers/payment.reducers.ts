@@ -2,13 +2,16 @@ import { CreditCardActionTypes } from "../actions/payment.actions";
 import { createFeatureSelector } from '@ngrx/store';
 export const selectEvent = createFeatureSelector<any>('creditCardPayment');
 
-const initialState :any= [];
-export function getdata(state = initialState ,action:any) {
+const initialState: any = {
+    creditCardDetails: [],
+    error: ''
+};
+export function getCreditCardDetails(state = initialState ,action:any) {
     switch (action.type) {
         case CreditCardActionTypes.ADD_CREDIT_CARD_SUCCESS:
-            return [...state,action.payload.payload]
+            return {...state, error: '',  creditCardDetails : [...state.creditCardDetails,action.payload.payload]}
         case CreditCardActionTypes.ADD_CREDIT_CARD_FAILURE:
-            return state;
+            return {...state,  creditCardDetails : [...state.creditCardDetails], error : action.payload.error}
         default:
             return state;   
     }

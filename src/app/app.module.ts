@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { CreditCardDetailsComponent } from './pages/credit-card-details/credit-card-details.component';
 import { CardDetailsComponent } from './components/card-details/card-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaymentDetailsService } from './payment-details.service';
 import { HttpClientModule } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import { EffectsModule } from '@ngrx/effects';
@@ -30,7 +29,6 @@ import {effect,state} from '../app/store/store'
     StoreModule.forRoot(state),
     StoreDevtoolsModule.instrument({ maxAge: 25, serialize: true }),
   ],
-  providers: [PaymentDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
