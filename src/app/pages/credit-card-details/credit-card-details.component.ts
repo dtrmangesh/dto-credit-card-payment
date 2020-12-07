@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PaymentDetailsService } from '../../payment-details.service';
 import { Store } from '@ngrx/store';
-import { AddCreditCard } from '../../store/actions/payment.actions';
+import { AddCreditCard, AddcreditCardSuccess } from '../../store/actions/payment.actions';
 
 @Component({
   selector: 'app-credit-card-details',
@@ -19,6 +19,7 @@ export class CreditCardDetailsComponent implements OnInit {
   creditAmount = "";
   minMonth: any;
   flippedCard = false;
+  addedCard = false;
   constructor(private readonly formBuilder: FormBuilder,
     private data: PaymentDetailsService,
     private store : Store
@@ -55,7 +56,6 @@ export class CreditCardDetailsComponent implements OnInit {
     });
   }
   get f() {
-    console.log(this.creditCardPayment.controls.amount.hasError('pattern'))
     return this.creditCardPayment.controls;
   }
   onAddCard() {
@@ -68,13 +68,13 @@ export class CreditCardDetailsComponent implements OnInit {
       securityCode :this.creditCardPayment.get('securityCode').value,
       amount :this.creditCardPayment.get('amount').value
     }
-    this.store.dispatch(new AddCreditCard(data))
-    console.log('card  added.',this.creditCardPayment.get('creditCardNumber').value);
+    this.store.dispatch(new AddCreditCard(data));
+    this.addedCard = true;
+    setTimeout(()=>this.addedCard=false ,3000)
   }
 
   flipCard(event :any) {
     if (!event) {
-      // document.querySelector('.creditcard').classList.add('flipped');
       this.flippedCard = true;
     } else {
       this.flippedCard = false;

@@ -109,7 +109,7 @@
         <input  id="cardHolderName" formControlName="cardHolderName" 
         type="text"
         (ngModelChange)="onNameChange($event)">
-        <span class="invalid-input" *ngIf="submitted && f.cardHolderName.errors">Name is required</span>
+        <span class="invalid-input" *ngIf="f.cardHolderName.touched && f.cardHolderName.errors">Name is required</span>
 
     </div>
     <div class="field-container">
@@ -120,31 +120,34 @@
             xmlns:xlink="http://www.w3.org/1999/xlink">
 
         </svg>
-        <span class="invalid-input" *ngIf="submitted && f.creditCardNumber.errors">Card Number is required</span>
+        <span class="invalid-input" *ngIf="f.creditCardNumber.touched && f.creditCardNumber.errors">Card Number is required</span>
 
     </div>
     <div class="field-container">
         <label for="expirationDate">Expiration (mm/yy)</label>
         <input type="month" min="{{minMonth}}"  id="expirationDate" formControlName="expirationDate"
         (ngModelChange)="onExpirationChange($event)">
-        <span class="invalid-input" *ngIf="submitted && f.expirationDate.errors">Expiration Date is required</span>
+        <span class="invalid-input" *ngIf="f.expirationDate.touched && f.expirationDate.errors">Expiration Date is required</span>
 
     </div>
     <div class="field-container">
         <label for="securityCode">Security Code</label>
         <input  type="text" id="securityCode"   formControlName="securityCode"
         (ngModelChange)="onCVVChange($event)" (blur)="flipCard(true)" (focus)="flipCard(false)">
-        <span class="invalid-input" *ngIf="submitted && (creditCardPayment.controls['securityCode'].hasError('maxlength') || creditCardPayment.controls['securityCode'].hasError('minlength')) ">CVV must be 3 digit.</span>
+        <span class="invalid-input" *ngIf="f.securityCode.touched && (creditCardPayment.controls['securityCode'].hasError('maxlength') || creditCardPayment.controls['securityCode'].hasError('minlength')) ">CVV must be 3 digit.</span>
 
     </div>
     <div class="field-container">
         <label for="amount">Amount </label>
         <input  type="text" id="amount" formControlName="amount">
-        <span class="invalid-input" *ngIf="submitted && f.amount.errors && !creditCardPayment.controls.amount.hasError('pattern')">Amount is required </span>
-                <span class="invalid-input" *ngIf="submitted && creditCardPayment.controls.amount.hasError('pattern')">Please enter valid amount </span>
+        <span class="invalid-input" *ngIf="f.amount.touched  && f.amount.errors && !creditCardPayment.controls.amount.hasError('pattern')">Amount is required </span>
+                <span class="invalid-input" *ngIf="creditCardPayment.controls.amount.hasError('pattern')">Please enter valid amount </span>
     </div>
-        <button type="submit">submit</button>    
+        <button type="submit" [disabled]="!creditCardPayment.valid">submit</button>    
 </div>
 
 </form>
 </div>
+
+<div id="toast" [ngClass]="addedCard ? 'show' : ''"><div id="desc">Card Added!!!</div></div>
+
