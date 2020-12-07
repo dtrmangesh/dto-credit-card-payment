@@ -62,7 +62,11 @@ export class CreditCardDetailsComponent implements OnInit {
     this.submitted = true;
 
     const data = {
-      creditCardPayment : this.creditCardPayment.get('creditCardNumber').value
+      creditCardNumber: this.creditCardPayment.get('creditCardNumber').value,
+      cardHolderName: this.creditCardPayment.get('cardHolderName').value,
+      expirationDate: this.creditCardPayment.get('expirationDate').value,
+      securityCode :this.creditCardPayment.get('securityCode').value,
+      amount :this.creditCardPayment.get('amount').value
     }
     this.store.dispatch(new AddCreditCard(data))
     console.log('card  added.',this.creditCardPayment.get('creditCardNumber').value);

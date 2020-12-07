@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaymentDetailsService } from './payment-details.service';
 import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { selectEvent } from './store/reducers/payment.reducers';
@@ -13,12 +12,12 @@ import { selectEvent } from './store/reducers/payment.reducers';
 export class AppComponent {
   title = 'app';
   isRoot = false;
+  creditCardPayments: any;
   mydata = this.store.pipe(take(1), select(selectEvent));
   constructor(private router: Router,
-    private data: PaymentDetailsService,
     private readonly store :Store
   ) {
-    this.mydata.subscribe(data => console.log(data))
+    this.mydata.subscribe(data => this.creditCardPayments = data);
    }
   goto() {
     this.isRoot = true;
