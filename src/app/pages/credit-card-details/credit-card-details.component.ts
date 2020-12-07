@@ -67,8 +67,7 @@ export class CreditCardDetailsComponent implements OnInit {
     const expiryDate = this.creditCardPayment.get('expirationDate').value;
     var validateExpiryDate = expiryDate.split('-');
     const getYear = new Date().getFullYear();
-    const getMonth = new Date().getMonth() + 1;
-    this.validateExpiryDate = validateExpiryDate[0] >= getYear && validateExpiryDate[1] >= getMonth ? true : false;
+    this.validateExpiryDate = validateExpiryDate[0] >= getYear ? true : false;
   }
 
   onAddCard() {
