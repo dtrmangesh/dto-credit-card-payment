@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div *ngIf="!isRoot" style="text-align:center">
+
+ 
+  <div class="button-container">
+    <button (click)="goto()" class="add-card-label">Add Card</button>
+  </div>
+  <div class="card-container">
+    <app-card-details></app-card-details>
+  </div>
+  
+</div>
+<div *ngIf="isRoot">
+<router-outlet></router-outlet>
+</div>

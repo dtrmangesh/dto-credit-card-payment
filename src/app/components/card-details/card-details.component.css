@@ -1,0 +1,62 @@
+* {
+    color: aliceblue;
+}
+
+
+.card-container{
+    width: 318px;
+    height: 198px;
+    background: #47494e;
+    text-align: center;
+    margin-left: 16%;
+    margin-top: 5%;
+    border-radius: 24px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+}
+.card-container:hover{
+    background:#47494e;
+    box-shadow:0px 2px 10px 5px #97B1BF;
+    color:#000;
+}
+
+.sim-image{
+    text-align: end;
+    top: -7px;
+    right: 10px;
+    position: relative;
+}
+.card-details{
+    padding-top: 43px;
+    padding-left: 10px;
+        text-align: left;
+        font-family: system-ui;
+
+}
+.card-organization{
+    text-align: start;
+    top: 30px;
+    /* right: 10px; */
+    left: 10px;
+    position: relative;
+}
+
+
+.holder-name{
+font-size: 19px;
+}
+
+.card-number{
+font-size: 12px;
+    padding-top: 12px;
+    font-weight: 300;
+
+}
+
+.ammount{
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 500;
+}
