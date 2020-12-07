@@ -125,9 +125,11 @@
     </div>
     <div class="field-container">
         <label for="expirationDate">Expiration (mm/yy)</label>
-        <input type="month" min="{{minMonth}}"  id="expirationDate" formControlName="expirationDate"
+        <input type="month" min="{{minMonth}}" (blur)="checkExpiryDate()"  id="expirationDate" formControlName="expirationDate"
         (ngModelChange)="onExpirationChange($event)">
         <span class="invalid-input" *ngIf="f.expirationDate.touched && f.expirationDate.errors">Expiration Date is required</span>
+        <span class="invalid-input" *ngIf="f.expirationDate.touched  && !validateExpiryDate">Expiration Date must greater than current date</span>
+
 
     </div>
     <div class="field-container">

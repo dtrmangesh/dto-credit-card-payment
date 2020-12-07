@@ -11,8 +11,6 @@ export class CreditEffect {
 
     @Effect()
     addCreditCard = this.action.pipe(ofType(CreditCardActionTypes.ADD_CREDIT_CARD), map((payload) => {
-      
-      console.log(payload)
       return new AddcreditCardSuccess(payload)
     }))
   

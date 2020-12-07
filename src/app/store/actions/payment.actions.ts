@@ -19,7 +19,6 @@ export class AddcreditCardSuccess implements Action {
 export class AddCreditCard implements Action {
     readonly type = CreditCardActionTypes.ADD_CREDIT_CARD;
     constructor(public payload: any) {
-        console.log(payload)
     }
 }
   
