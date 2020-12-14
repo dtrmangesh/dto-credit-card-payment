@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ICreditCardPayment } from 'src/app/app.interfaces';
 
 @Component({
   selector: 'app-card-details',
@@ -6,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./card-details.component.css']
 })
 export class CardDetailsComponent {
-  @Input() creditPaymentDetails: any;
+  @Input() creditPaymentDetails : ICreditCardPayment[] = [];
   flippedCard =false
   constructor() { }
 
